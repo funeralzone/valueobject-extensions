@@ -21,5 +21,6 @@ This package provides some useful value object helpers for common values (e.g. U
 ## List of value object helpers ##
 
 * UUID
+* Generatable UUID
 
 (that's it for now...more to come)
