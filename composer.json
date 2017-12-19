@@ -9,8 +9,8 @@
     }
   ],
   "require": {
-    "php": "^7.1.0",
-    "funeralzone/valueobjects": "^0.1.0",
+    "php": "^7.1",
+    "funeralzone/valueobjects": "^0.0",
     "ramsey/uuid": "^3.7",
     "nesbot/carbon": "^1.22"
   },
