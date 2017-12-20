@@ -1,5 +1,8 @@
 # valueobject-extensions
 
+[![Build Status](https://travis-ci.org/funeralzone/valueobject-extensions.svg)](https://travis-ci.org/funeralzone/valueobject-extensions)
+[![Version](https://img.shields.io/packagist/v/funeralzone/valueobject-extensions.svg)](https://packagist.org/packages/funeralzone/valueobject-extensions)
+
 Some routine value objects for use with funeralzone/valueobjects.
 
 ## Requirements ##
