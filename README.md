@@ -22,5 +22,4 @@ This package provides some useful value object helpers for common values (e.g. U
 
 * UUID
 * Generatable UUID
-
-(that's it for now...more to come)
+* RFC3339 datetime
