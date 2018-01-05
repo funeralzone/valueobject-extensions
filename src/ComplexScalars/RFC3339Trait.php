@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Funeralzone\ValueObjectExtensions\ComplexScalars;
 
 use Funeralzone\ValueObjects\ValueObject;
@@ -18,7 +16,7 @@ trait RFC3339Trait
      * RFC3339Trait constructor.
      * @param \DateTime $rfc3339
      */
-    public function __construct(\DateTime $rfc3339)
+    public function __construct(\DateTimeInterface $rfc3339)
     {
         $this->rfc3339 = $rfc3339;
     }
