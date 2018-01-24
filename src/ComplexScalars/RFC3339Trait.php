@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace Funeralzone\ValueObjectExtensions\ComplexScalars;
 
+use const DATE_RFC3339;
+use DateTimeImmutable;
 use Funeralzone\ValueObjects\ValueObject;
-use Carbon\Carbon;
 
 trait RFC3339Trait
 {
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $rfc3339;
 
     /**
      * RFC3339Trait constructor.
-     * @param \DateTime $rfc3339
+     * @param \DateTimeInterface $rfc3339
      */
     public function __construct(\DateTimeInterface $rfc3339)
     {
@@ -50,7 +51,7 @@ trait RFC3339Trait
             throw new \InvalidArgumentException('Can only instantiate this object with a string.');
         }
 
-        $datetime = \DateTime::createFromFormat(\DateTime::RFC3339, $native);
+        $datetime = DateTimeImmutable::createFromFormat(DATE_RFC3339, $native);
         if (!$datetime) {
             throw new \InvalidArgumentException('Can only instantiate this object with a valid RFC3339 string.');
         }
@@ -63,6 +64,6 @@ trait RFC3339Trait
      */
     public function toNative()
     {
-        return Carbon::createFromTimestamp($this->rfc3339->getTimestamp(), $this->rfc3339->getTimezone())->toRfc3339String();
+        return $this->rfc3339->format(DATE_RFC3339);
     }
 }
