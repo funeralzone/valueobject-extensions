@@ -54,6 +54,7 @@ class UriTraitTest extends TestCase
     }
 }
 
-final class _UriTrait implements ValueObject {
+final class _UriTrait implements ValueObject
+{
     use UriTrait;
 }

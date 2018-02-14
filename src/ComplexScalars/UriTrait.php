@@ -39,6 +39,7 @@ trait UriTrait
 
     /**
      * @param ValueObject $object
+     *
      * @return bool
      */
     public function isSame(ValueObject $object): bool
@@ -48,6 +49,7 @@ trait UriTrait
 
     /**
      * @param string $native
+     *
      * @throws Exception
      * @return static
      */
@@ -58,7 +60,7 @@ trait UriTrait
         }
 
         $factory = new Factory();
-        $uri = $factory->create($native);
+        $uri     = $factory->create($native);
 
         return new self($uri);
     }
