@@ -6,6 +6,8 @@
  * Time: 15:26
  */
 
+declare(strict_types=1);
+
 namespace Funeralzone\ValueObjectExtensions\ComplexScalars;
 
 use Funeralzone\ValueObjects\ValueObject;
@@ -52,6 +54,6 @@ class UriTraitTest extends TestCase
     }
 }
 
-class _UriTrait implements ValueObject {
+final class _UriTrait implements ValueObject {
     use UriTrait;
 }
