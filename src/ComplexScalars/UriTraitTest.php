@@ -54,6 +54,78 @@ class UriTraitTest extends TestCase
         $this->expectException(Exception::class);
         _UriTrait::fromNative('http:example.com');
     }
+
+    public function test_withScheme_changes_scheme_and_returns_new_object()
+    {
+        $initial = _UriTrait::fromNative('http://example.com');
+        $changed = $initial->withScheme('https');
+
+        $this->assertSame('https://example.com', $changed->toNative());
+        $this->assertNotSame($initial, $changed);
+    }
+
+    public function test_withUserInfo_changes_user_and_returns_new_object()
+    {
+        $initial = _UriTrait::fromNative('http://example.com');
+        $changed = $initial->withUserInfo('mike');
+
+        $this->assertSame('http://mike@example.com', $changed->toNative());
+        $this->assertNotSame($initial, $changed);
+    }
+
+    public function test_withUserInfo_adds_pass_and_returns_new_object()
+    {
+        $initial = _UriTrait::fromNative('http://example.com');
+        $changed = $initial->withUserInfo('mike', 'password123');
+
+        $this->assertSame('http://mike:password123@example.com', $changed->toNative());
+        $this->assertNotSame($initial, $changed);
+    }
+
+    public function test_withHost_changes_host_and_returns_new_object()
+    {
+        $initial = _UriTrait::fromNative('http://example.com');
+        $changed = $initial->withHost('boom.com');
+
+        $this->assertSame('http://boom.com', $changed->toNative());
+        $this->assertNotSame($initial, $changed);
+    }
+
+    public function test_withPort_changes_port_and_returns_new_object()
+    {
+        $initial = _UriTrait::fromNative('http://example.com');
+        $changed = $initial->withPort(8080);
+
+        $this->assertSame('http://example.com:8080', $changed->toNative());
+        $this->assertNotSame($initial, $changed);
+    }
+
+    public function test_withPath_changes_path_and_returns_new_object()
+    {
+        $initial = _UriTrait::fromNative('http://example.com/some/path');
+        $changed = $initial->withPath('/new/path');
+
+        $this->assertSame('http://example.com/new/path', $changed->toNative());
+        $this->assertNotSame($initial, $changed);
+    }
+
+    public function test_withQuery_changes_query_and_returns_new_object()
+    {
+        $initial = _UriTrait::fromNative('http://example.com');
+        $changed = $initial->withQuery('foo=bar');
+
+        $this->assertSame('http://example.com?foo=bar', $changed->toNative());
+        $this->assertNotSame($initial, $changed);
+    }
+
+    public function test_withFragment_changes_fragment_and_returns_new_object()
+    {
+        $initial = _UriTrait::fromNative('http://example.com');
+        $changed = $initial->withFragment('foo');
+
+        $this->assertSame('http://example.com#foo', $changed->toNative());
+        $this->assertNotSame($initial, $changed);
+    }
 }
 
 final class _UriTrait implements ValueObject
