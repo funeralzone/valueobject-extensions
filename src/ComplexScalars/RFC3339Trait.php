@@ -6,22 +6,23 @@ namespace Funeralzone\ValueObjectExtensions\ComplexScalars;
 
 use const DATE_RFC3339;
 use DateTimeImmutable;
+use DateTimeInterface;
 use Funeralzone\ValueObjects\ValueObject;
 
 trait RFC3339Trait
 {
     /**
-     * @var \DateTimeInterface
+     * @var DateTimeInterface
      */
-    protected $rfc3339;
+    protected $dateTime;
 
     /**
      * RFC3339Trait constructor.
-     * @param \DateTimeInterface $rfc3339
+     * @param DateTimeInterface $dateTime
      */
-    public function __construct(\DateTimeInterface $rfc3339)
+    public function __construct(DateTimeInterface $dateTime)
     {
-        $this->rfc3339 = $rfc3339;
+        $this->dateTime = $dateTime;
     }
 
     /**
@@ -51,12 +52,12 @@ trait RFC3339Trait
             throw new \InvalidArgumentException('Can only instantiate this object with a string.');
         }
 
-        $datetime = DateTimeImmutable::createFromFormat(DATE_RFC3339, $native);
-        if (!$datetime) {
+        $dateTime = DateTimeImmutable::createFromFormat(DATE_RFC3339, $native);
+        if (!$dateTime) {
             throw new \InvalidArgumentException('Can only instantiate this object with a valid RFC3339 string.');
         }
 
-        return new self($datetime);
+        return new self($dateTime);
     }
 
     /**
@@ -64,6 +65,22 @@ trait RFC3339Trait
      */
     public function toNative()
     {
-        return $this->rfc3339->format(DATE_RFC3339);
+        return $this->dateTime->format(DATE_RFC3339);
+    }
+
+    /**
+     * @return DateTimeInterface
+     */
+    public function toDateTime(): DateTimeInterface
+    {
+        return $this->dateTime;
+    }
+
+    /**
+     * @return int
+     */
+    public function toTimestamp(): int
+    {
+        return $this->dateTime->getTimestamp();
     }
 }

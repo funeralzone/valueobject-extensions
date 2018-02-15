@@ -21,21 +21,21 @@ final class RFC3339TraitTest extends TestCase
 
     public function test_is_same_returns_true_when_values_match()
     {
-        $rfc3339 = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2010-01-01 00:00:00');
+        $dateTime = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2010-01-01 00:00:00');
 
-        $test1 = new _RFC3339Trait($rfc3339);
-        $test2 = new _RFC3339Trait($rfc3339);
+        $test1 = new _RFC3339Trait($dateTime);
+        $test2 = new _RFC3339Trait($dateTime);
 
         $this->assertTrue($test1->isSame($test2));
     }
 
     public function test_is_same_returns_false_when_values_mismatch()
     {
-        $rfc33391 = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2010-01-01 00:00:00');
-        $rfc33392 = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2010-01-01 00:02:00');
+        $dateTime1 = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2010-01-01 00:00:00');
+        $dateTime2 = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2010-01-01 00:02:00');
 
-        $test1 = new _RFC3339Trait($rfc33391);
-        $test2 = new _RFC3339Trait($rfc33392);
+        $test1 = new _RFC3339Trait($dateTime1);
+        $test2 = new _RFC3339Trait($dateTime2);
 
         $this->assertFalse($test1->isSame($test2));
     }
@@ -56,10 +56,26 @@ final class RFC3339TraitTest extends TestCase
 
     public function test_to_native_returns_correct_string_representation_of_rfc3339()
     {
-        $rfc3339 = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2010-01-01 00:00:00');
+        $dateTime = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2010-01-01 00:00:00');
 
-        $test = new _RFC3339Trait($rfc3339);
-        $this->assertEquals($rfc3339->format(DATE_RFC3339), $test->toNative());
+        $test = new _RFC3339Trait($dateTime);
+        $this->assertEquals($dateTime->format(DATE_RFC3339), $test->toNative());
+    }
+
+    public function test_toDateTime_returns_constructed_dateTime()
+    {
+        $dateTime = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2010-01-01 00:00:00');
+
+        $test = new _RFC3339Trait($dateTime);
+        $this->assertEquals($dateTime, $test->toDateTime());
+    }
+
+    public function test_toTimestamp_returns_correct_unix_timestamp_for_constructed_dateTime()
+    {
+        $dateTime = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2010-01-01 00:00:00');
+
+        $test = new _RFC3339Trait($dateTime);
+        $this->assertEquals($dateTime->getTimestamp(), $test->toTimestamp());
     }
 }
 
