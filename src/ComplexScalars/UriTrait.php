@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Funeralzone\ValueObjectExtensions\ComplexScalars;
 
-
 use Funeralzone\ValueObjects\ValueObject;
 use League\Uri\Exception;
 use League\Uri\Factory;
