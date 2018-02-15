@@ -61,13 +61,13 @@ trait UriTrait
         $factory = new Factory();
         $uri     = $factory->create($native);
 
-        return new self($uri);
+        return new static($uri);
     }
 
     /**
      * @return string
      */
-    public function toNative()
+    public function toNative(): string
     {
         return $this->uri->__toString();
     }
@@ -75,7 +75,7 @@ trait UriTrait
     /**
      * @return UriInterface
      */
-    public function getPsr7Uri()
+    public function getPsr7Uri(): UriInterface
     {
         return $this->uri;
     }
@@ -83,71 +83,71 @@ trait UriTrait
     /**
      * @param string $scheme
      *
-     * @return UriTrait
+     * @return static
      */
     public function withScheme(string $scheme)
     {
-        return new self($this->uri->withScheme($scheme));
+        return new static($this->uri->withScheme($scheme));
     }
 
     /**
      * @param string      $user
      * @param string|null $password
      *
-     * @return UriTrait
+     * @return static
      */
     public function withUserInfo(string $user, string $password = null)
     {
-        return new self($this->uri->withUserInfo($user, $password));
+        return new static($this->uri->withUserInfo($user, $password));
     }
 
     /**
      * @param string $host
      *
-     * @return UriTrait
+     * @return static
      */
     public function withHost(string $host)
     {
-        return new self($this->uri->withHost($host));
+        return new static($this->uri->withHost($host));
     }
 
     /**
      * @param int $port
      *
-     * @return UriTrait
+     * @return static
      */
     public function withPort(int $port)
     {
-        return new self($this->uri->withPort($port));
+        return new static($this->uri->withPort($port));
     }
 
     /**
      * @param string $path
      *
-     * @return UriTrait
+     * @return static
      */
     public function withPath(string $path)
     {
-        return new self($this->uri->withPath($path));
+        return new static($this->uri->withPath($path));
     }
 
     /**
      * @param string $query
      *
-     * @return UriTrait
+     * @return static
      */
     public function withQuery(string $query)
     {
-        return new self($this->uri->withQuery($query));
+        return new static($this->uri->withQuery($query));
     }
 
     /**
      * @param string $fragment
      *
-     * @return UriTrait
+     * @return static
      */
     public function withFragment(string $fragment)
     {
-        return new self($this->uri->withFragment($fragment));
+        return new static($this->uri->withFragment($fragment));
     }
 }
