@@ -6,6 +6,8 @@
  * Time: 15:26
  */
 
+// @codingStandardsIgnoreFile
+
 declare(strict_types=1);
 
 namespace Funeralzone\ValueObjectExtensions\ComplexScalars;
