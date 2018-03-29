@@ -7,6 +7,7 @@ namespace Funeralzone\ValueObjectExtensions\ComplexScalars;
 use DateTimeImmutable;
 use Exception;
 use Funeralzone\ValueObjects\ValueObject;
+use InvalidArgumentException;
 
 trait DateTrait
 {
@@ -47,7 +48,11 @@ trait DateTrait
      */
     public static function fromNative($native)
     {
-        return new static(DateTimeImmutable::createFromFormat('Y-m-d', $native));
+        $date = DateTimeImmutable::createFromFormat('Y-m-d', $native);
+        if (!$date) {
+            throw new InvalidArgumentException('String must be a valid date in Y-m-d format.');
+        }
+        return new static($date);
     }
 
     /**
