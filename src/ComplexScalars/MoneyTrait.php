@@ -8,6 +8,7 @@ use Funeralzone\ValueObjects\ValueObject;
 use function method_exists;
 use Money\Currency;
 use Money\Money;
+use function var_dump;
 
 trait MoneyTrait
 {
@@ -39,15 +40,7 @@ trait MoneyTrait
      */
     public function isSame(ValueObject $object): bool
     {
-        if (!method_exists($object, 'getMoney')) {
-            return false;
-        }
-        $money = $object->getMoney();
-        if (!$money instanceof Money) {
-            return false;
-        }
-        /* @var Money $object */
-        return ($this->money->equals($money));
+        return ($object->toNative() == $this->toNative());
     }
 
     /**
