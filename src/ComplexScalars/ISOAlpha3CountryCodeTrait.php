@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Funeralzone\ValueObjectExtensions\ComplexScalars;
 
-use Funeralzone\ValueObjects\Enums\EnumTrait;
+use Funeralzone\ValueObjectExtensions\ComplexScalars\Support\ArrayDefinedEnum;
 
 trait ISOAlpha3CountryCodeTrait
 {
-    use EnumTrait;
+    use ArrayDefinedEnum;
 
     /**
      * @return array
      */
-    private static function constants(): array
+    protected static function getArrayConstants(): array
     {
-        $array = [
+        return [
             'AFG',
             'ALA',
             'ALB',
@@ -266,31 +266,5 @@ trait ISOAlpha3CountryCodeTrait
             'ZMB',
             'ZWE'
         ];
-
-        /**
-         * [
-         *    'AFG' => 0
-         *    'ALA' => 1
-         *    ...
-         * ]
-         */
-        return array_combine(
-            $array,
-            array_keys($array)
-        );
-    }
-
-    /**
-     * @param $name
-     * @param $arguments
-     * @return static
-     */
-    public static function __callStatic($name, $arguments)
-    {
-        if (!in_array($name, static::constantKeys())) {
-            throw new \RuntimeException($name . ' is an invalid value for this enum.');
-        }
-
-        return new static(static::constants()[$name]);
     }
 }
